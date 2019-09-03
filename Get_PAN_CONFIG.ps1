@@ -1,0 +1,2 @@
+﻿$dt=Get-Date -UFormat "%D"
+Invoke-RestMethod -Method Get -URI https://10.109.131.207/api/?type=export"&"category=configuration"&"key=LUFRPT00eGFkWXRjS2JwUGRkbFp5Z2M4R1E5MXpuZkE9WGpudG8zOVM4VEJ2Yld5TkUyUGgyNW1EVzZRbWNISklaNEFUZXEzSHJuYz0= -OutFile C:\Users\Pavel_Kuprin\running-config_$dt.xml

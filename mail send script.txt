@@ -1,0 +1,11 @@
+﻿mailbody="Testmail via bash script"
+echo "From: wdc_mxh@syncplicity.com" >> /tmp/mailtest
+echo "To: piotr.vasiuchonak@syncplicity.com" >> /tmp/mailtest
+echo "Subject: Test email " >> /tmp/mailtest
+echo "" >> /tmp/mailtest
+echo $mailbody >> /tmp/mailtest
+cat /tmp/mailtest | /usr/sbin/sendmail -t
+rm -fv /tmp/mailtest
+
+
+echo -e "From: wdc_mxh@syncplicity.com\nTo: piotr.vasiuchonak@syncplicity.com\nSubject: Test email\n\nTestmail via bash script" | /usr/sbin/sendmail -t
