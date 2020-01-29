@@ -1,6 +1,11 @@
 from os import listdir
 import os
+import sys
+import subprocess
+from subprocess import check_output
 from os.path import isfile, join
+import json
+import csv
 
 
 def get_unique(folder):
@@ -18,9 +23,26 @@ def get_unique(folder):
     return ip_unique_list
 
 
+def whois(input):
+    ip_and_name = {}
+    for item in filter(None, input):
+        cmd = "whois {0}".format(item)
+        proc = subprocess.check_output(cmd.split())
+        start = proc.find('OrgName:')
+        end = proc.find('OrgId:')
+        if start:
+            org_name = (proc[start:end]).strip()
+            ip_and_name[item] = org_name
+    return ip_and_name
+
+
 folder = input("Give me the path in quotes: ")
 outout = get_unique(folder)
-with open("{}/get_unique.txt".format(folder), 'w') as output:
-    for item in outout:
-        output.write("%s\n" % item)
-print("Look for you get_unique.txt file here: {}".format(folder))
+print(outout)
+whois_output = whois(outout)
+print(whois_output)
+ip_and_name_list = "{}/ip_and_name_list.txt".format(folder)
+w = csv.writer(open(ip_and_name_list, "w"))
+for key, val in whois_output.items():
+    w.writerow([key, val])
+print("Look for you file here: {}".format(folder))

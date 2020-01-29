@@ -1,2 +1,2 @@
-folder = input("Give me the path: ")
+folder = "extryiuom"
 print(folder)
