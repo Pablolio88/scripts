@@ -1,25 +1,17 @@
 from os import listdir
 import os
-import sys
 import subprocess
-from subprocess import check_output
-from os.path import isfile, join
-import json
 import csv
 
 
 def get_unique(folder):
-    ip_unique_list = []
+    ip_unique_list = set([])
     for f in listdir(folder):
         f = os.path.join(folder, f)
         with open(f) as file:
-            start_list = []
             for line in file:
                 line = line.strip()
-                start_list.append(line)
-            for i in start_list:
-                if i not in ip_unique_list:
-                    ip_unique_list.append(i)
+                ip_unique_list.add(line)
     return ip_unique_list
 
 
