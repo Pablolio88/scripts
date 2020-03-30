@@ -20,8 +20,8 @@ def whois(input):
     for item in filter(None, input):
         cmd = "whois {0}".format(item)
         proc = subprocess.check_output(cmd.split())
-        start = proc.find('OrgName:')
-        end = proc.find('OrgId:')
+        start = proc.find('netname:')
+        end = proc.find('country:')
         if start:
             org_name = (proc[start:end]).strip()
             ip_and_name[item] = org_name
